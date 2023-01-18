@@ -1,22 +1,24 @@
 const baseEndpoint = 'https://api.github.com';
 const usersEndpoint = `${baseEndpoint}/users`;
-const $n = document.querySelector('name');
-const $b = document.querySelector('#blog');
+const $n = document.querySelector('.name'); //name es una clase.
+const $b = document.querySelector('.blog'); // blog es una clase, estaba definido como id.
 const $l = document.querySelector('.location');
 
-function displayUser(username) {
+async function displayUser(username) {
+  //Se completó la syntax de la función como un async
   $n.textContent = 'cargando...';
   const response = await fetch(`${usersEndpoint}/${username}`);
-  console.log(data);
-  $n.textContent = '${data.name}';
-  $b.textContent = '${data.blog}';
-  $l.textContent = '${data.location}';
+  const data = await response.json(); //declaré la variable data y asigne su valor.
+  console.log(response);
+  $n.textContent = `${data.name}`; //uso de backticks para que se reconociera la suntax de literal strings.
+  $b.textContent = `${data.blog}`;
+  $l.textContent = `${data.location}`;
 }
 
 function handleError(err) {
   console.log('OH NO!');
   console.log(err);
-  n.textContent = `Algo salió mal: ${err}`
+  n.textContent = `Algo salió mal: ${err}`;
 }
 
 displayUser('stolinski').catch(handleError);
