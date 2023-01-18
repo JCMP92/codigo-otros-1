@@ -7,12 +7,17 @@ const $l = document.querySelector('.location');
 async function displayUser(username) {
   //Se completó la syntax de la función como un async
   $n.textContent = 'cargando...';
+  try{
   const response = await fetch(`${usersEndpoint}/${username}`);
   const data = await response.json(); //declaré la variable data y asigne su valor.
   console.log(response);
   $n.textContent = `${data.name}`; //uso de backticks para que se reconociera la suntax de literal strings.
   $b.textContent = `${data.blog}`;
   $l.textContent = `${data.location}`;
+  } catch (error) {
+    throw new Error ('Error');
+  }
+
 }
 
 function handleError(err) {
